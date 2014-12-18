@@ -1,0 +1,21 @@
+{% extends "_layouts/cp" %}
+
+{% set helpPath = (helpPath is defined) ? helpPath : "index" %}
+{% set title = "Help"|t %}
+
+{% set sidebar %}
+  <nav>
+{{ getSidebar() }}
+  </nav>
+{% endset %}
+
+{% set content %}
+{% includeCssResource('help/css/help.css') %}
+{% includeJsResource('help/js/help.js') %}
+
+{% includeCssResource('help/css/prism.css') %}
+{% includeJsResource('help/js/prism.js') %}
+<div id="help-content">
+  {{ getHelpDocument(helpPath) }}
+</div>
+{% endset %}

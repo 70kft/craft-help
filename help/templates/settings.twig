@@ -1,0 +1,12 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+  first:        true,
+  label:        "Help Templates Path"|t,
+  instructions: 'The path within <code>craft/templates</code> where the plugin will look for help files',
+  id:           'helpTemplatePath',
+  name:         'helpTemplatePath',
+  placeholder:  '_help',
+  value:        settings.helpTemplatePath,
+  autofocus:    true,
+}) }}

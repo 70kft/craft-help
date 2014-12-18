@@ -1,0 +1,21 @@
+{% set helpUri = craft.request.path|replace("help/","") %}
+<ul>
+  <li>
+    <a href="{{ url("help") }}"{% if helpUri == "help" %} class="sel"{% endif %}>Home</a>
+  </li>
+  {% for doc in docs %}
+    <li>
+      <a href="{{ url("help/" ~ doc.path) }}"{% if helpUri == doc.path %} class="sel"{% endif %}>{{ doc.title }}</a>
+      {% if doc.children|length %}
+      <div class="toggle"></div>
+      <ul>
+        {% for doc in doc.children %}
+          <li>
+            <a href="{{ url("help/" ~ doc.path) }}"{% if helpUri == doc.path %} class="sel"{% endif %}>{{ doc.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

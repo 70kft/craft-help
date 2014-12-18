@@ -1,0 +1,112 @@
+{# Title: Getting Started #}
+<h1>Welcome to Craft Help!</h1>
+<p>
+  <em>If you’re seeing this document, then you probably haven’t created any templates in </em><code>{{ getHelpTemplatePath() }}</code>. <em><a href="{{ url('settings/plugins/help') }}">Change this path</a></em>
+</p>
+
+<h2 id="how-it-works">How it Works</h2>
+<p>Craft Help allows developers to provide CMS documentation to their clients directly inside the control panel. You can place folders and Twig files in <code>{{ getHelpTemplatePath() }}</code> and they will automatically be assembled into a navigation tree to the left.</p>
+<p><strong>Note:</strong> Before you go any further, please be aware that creating an <code>index.twig</code> template file in <code>{{ getHelpTemplatePath() }}</code> will cause this help document to disappear.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+  <li>Place templates in <code>{{ getHelpTemplatePath() }}</code>.</li>
+  <li><code>index.twig</code> will be the first thing people see when they click “Help” in the top navbar.</li>
+  <li>Prefix file names with numbers if you want to control their order (e.g: <code>01-sections-and-entries.twig</code>).</li>
+  <li>Add a comment like this at the top of each of your help docs to give them a nice-looking title in the side nav: <br>
+  <code class="language-twig">{% verbatim %}{# Title: Block Types #}{% endverbatim %}</code></li>
+  <li>Link between your help docs like this: <code class="language-twig">{% verbatim %}&lt;a href="{{ url("help/02-block-types") }}"&gt;Block types&lt;/a&gt;{% endverbatim %}</code></li>
+  <li>Link heavily to the <a href="http://buildwithcraft.com/docs/introduction">official Craft documentation</a>. Don’t waste your time writing about how Craft works, just write about how you set up the CMS for a particular client.</li>
+</ul>
+<hr>
+<h2 id="kitchen-sink">Kitchen Sink</h2>
+<p>Feel free to use all sort of HTML elements when building your documentation!</p>
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+
+<p>Paragraphs with <strong>bold</strong> and <em>italic</em> and <code>monospace</code> text.</p>
+
+<ul>
+  <li>Bulleted</li>
+  <li>
+    lists
+    <ul>
+      <li>are</li>
+      <li>sometimes</li>
+      <li>useful</li>
+    </ul>
+  </li>
+</ul>
+<ol>
+  <li>Numbered</li>
+  <li>lists</li>
+  <li>are</li>
+  <li>useful</li>
+  <li>too</li>
+</ol>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Table Heading 1</th>
+      <th>Table Heading 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Content Row 1</strong></td>
+      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit vero perspiciatis cumque sint, doloremque, unde perferendis beatae nobis deleniti aperiam, pariatur explicabo facere at iste esse eos corporis placeat! Voluptatem?</td>
+    </tr>
+    <tr>
+      <td><strong>Content Row 2</strong></td>
+      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit vero perspiciatis cumque sint, doloremque, unde perferendis beatae nobis deleniti aperiam, pariatur explicabo facere at iste esse eos corporis placeat! Voluptatem?</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure>
+  <img src="//placekitten.com/g/800/600" alt="A random kitten">
+  <figcaption>An image showing a random kitten</figcaption>
+</figure>
+
+<blockquote>
+  “Blockquotes are just generally useful things.”
+  <br>
+  <div class="text-right">&mdash;Anonymous</div>
+</blockquote>
+<p>Developers really like to see code examples, so we've included <a href="http://prismjs.com/" target="_blank">Prism.js</a> with support for HTML, Twig, JavaScript, and PHP.</p>
+
+<pre class="language-javascript"><code>
+// JavaScript
+
+function showAlert () {
+  var integer = 42
+  var alertMessage = 'The alert is being shown';
+  alert(alertMessage);
+} 
+
+</code></pre>
+{% verbatim %}
+<p>Be sure to wrap Twig in <a href="http://twig.sensiolabs.org/doc/tags/verbatim.html" target="_blank">verbatim tags</a> so Twig doesn’t try to parse your example code. You’ll also need to encode your HTML entities so they get shown and not rendered by the browser.</p>
+<pre class="language-twig"><code>
+{# Twig #}
+
+&lt;h1&gt;{{ entry.title }}&lt;/h1&gt;
+{% for block in entry.contentBlocks %}
+  {# include partials... #}
+{% endfor %}
+
+</code></pre>
+{% endverbatim %}
+{% verbatim %}
+<pre class="language-php"><code>
+// PHP
+
+echo craft()->request->getParam('token');
+
+</code></pre>
+{% endverbatim %}

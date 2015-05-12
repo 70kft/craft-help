@@ -24,14 +24,14 @@ class Help_DocsService extends BaseApplicationComponent {
     {
       if (!$node->isDot()) {
         if($node->isFile() && $node->getFilename() != "index.twig" && substr($node->getFilename(), 0,1) != '.') {
-          $data[] = array(
+          $data[$node->getFilename()] = array(
             'path' => $this->cleanFileName($node->getPathname()),
             'title' => $this->extractTitle($node->getPathname()),
             'children' => array()
           );
         }
         else if($node->isDir()) {
-          $data[] = array(
+          $data[$node->getFilename()] = array(
             'path' => $this->cleanFileName($node->getPathname()),
             'title' => $this->extractTitle($node->getPathname()),
             'children' => $this->getDocs( $node->getPathname() )
@@ -40,6 +40,7 @@ class Help_DocsService extends BaseApplicationComponent {
       }
     }
 
+    ksort($data);
     return $data;
   }
 

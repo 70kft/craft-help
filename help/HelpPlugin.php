@@ -1,12 +1,8 @@
-<?php 
+<?php
 
 namespace Craft;
 
 class HelpPlugin extends BasePlugin {
-  function init () {
-
-  }
-  
   function getName () {
     return Craft::t('Help');
   }
@@ -47,11 +43,23 @@ class HelpPlugin extends BasePlugin {
     );
   }
 
-  public function addTwigExtension()  
+  public function addTwigExtension()
   {
       Craft::import('plugins.help.twigextensions.HelpTwigExtension');
 
       return new HelpTwigExtension();
+  }
+  
+  public function addAdminBarLinks() {
+    // Register an admin bar link for @wbrowar's adminbar plugin
+    // https://github.com/wbrowar/craft-admin-bar
+    return array(
+      array(
+        'title' => 'Help',
+        'url' => 'help',
+        'type' => 'cpUrl',
+      ),
+    );
   }
 }
 
